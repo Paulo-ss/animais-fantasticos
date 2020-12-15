@@ -4,10 +4,10 @@ import TabNav from './Modules/tab-nav.js';
 import ScrollSuave from './Modules/scroll-suave.js';
 // Importando a classe do accordion list da seção de FAQ
 import Accordion from './Modules/accordion.js';
+// Importando a classe de abrir e fechar o modal
+import Modal from './Modules/modal.js';
 // Importando a classe que anima as section no scroll da página
 import animacaoScroll from './Modules/scroll-animacao.js';
-// Importando a classe de abrir e fechar o modal
-import abrirModal from './Modules/modal.js';
 // Importando a classe do tooltipe
 import toolTip from './Modules/tooltip.js';
 // Importando a classe que ativa o dropdown-menu
@@ -21,20 +21,23 @@ import initFetchAnimais from './Modules/fetch-animais.js';
 // Importando a classe que traz o valor de bitcoin na seção de contato
 import initFetchBitcoin from './Modules/fetch-bitcoin.js';
 
-// Chamando a classe que faz a nevagação por tabs na seção de animais
+// Iniciando a classe que faz a nevagação por tabs na seção de animais
 const tabNav = new TabNav('[data-tab="menu"] li', '[data-tab="content"] section');
 tabNav.init();
 
-// Chamando a classe que faz o scroll suave
+// Iniciando a classe que faz o scroll suave
 const scrollSuave = new ScrollSuave('[data-menu="suave"] a[href^="#"]');
 scrollSuave.init();
 
-// Chamando a classe do accordion list
+// Iniciando a classe do accordion list
 const accordion = new Accordion('[data-anime="accordion"] dt');
 accordion.init();
 
+// Iniciando a classe que abre e fecha o Modal
+const modal = new Modal('[data-modal="abrir"]', '[data-modal="fechar"]', '[data-modal="container"]');
+modal.init();
+
 animacaoScroll();
-abrirModal();
 toolTip();
 dropdownMenu();
 menuMobile();
