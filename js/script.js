@@ -8,14 +8,14 @@ import Accordion from './Modules/accordion.js';
 import Modal from './Modules/modal.js';
 // Importando a classe do tooltip
 import ToolTip from './Modules/tooltip.js';
+// Importando a classe que faz o fecth dos números e anima eles na seção de números
+import fetchAnimais from './Modules/fetch-animais.js';
 // Importando a classe que ativa o dropdown-menu
 import dropdownMenu from './Modules/dropdown-menu.js';
 // Importando a classe que controla o menu mobile
 import menuMobile from './Modules/menu-mobile.js';
 // Importando a classe que verifica o horário de funcionamento
 import funcionamento from './Modules/funcionamento.js';
-// Importando a classe que faz o fecth dos números e anima eles na seção de números
-import initFetchAnimais from './Modules/fetch-animais.js';
 // Importando a classe que traz o valor de bitcoin na seção de contato
 import initFetchBitcoin from './Modules/fetch-bitcoin.js';
 // Importando a classe que anima as section no scroll da página
@@ -41,9 +41,11 @@ modal.init();
 const toolTip = new ToolTip('[data-tooltip]');
 toolTip.init();
 
+// Iniciando a função que da o fecth nos números de animais na seção de números
+fetchAnimais('../../animaisapi.json', '.numeros-grid');
+
 dropdownMenu();
 menuMobile();
 funcionamento();
-initFetchAnimais();
 initFetchBitcoin();
 animacaoScroll();
