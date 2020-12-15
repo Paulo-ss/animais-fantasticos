@@ -3,7 +3,7 @@ import iniciarTabMenu from './Modules/tab-nav.js';
 // Importando a função de scroll suave
 import ScrollSuave from './Modules/scroll-suave.js';
 // Chamando a função do accordion list da seção de FAQ
-import accordionFAQ from './Modules/accordion.js';
+import Accordion from './Modules/accordion.js';
 // Chamando a função que anima as section no scroll da página
 import animacaoScroll from './Modules/scroll-animacao.js';
 // Chamando a função de abrir e fechar o modal
@@ -21,11 +21,15 @@ import initFetchAnimais from './Modules/fetch-animais.js';
 // Importando a função que traz o valor de bitcoin na seção de contato
 import initFetchBitcoin from './Modules/fetch-bitcoin.js';
 
+// Chamando a classe que faz o scroll suave
 const scrollSuave = new ScrollSuave('[data-menu="suave"] a[href^="#"]');
 scrollSuave.init();
 
+// Chamando a classe do accordion list
+const accordion = new Accordion('[data-anime="accordion"] dt');
+accordion.init();
+
 iniciarTabMenu();
-accordionFAQ();
 animacaoScroll();
 abrirModal();
 toolTip();
