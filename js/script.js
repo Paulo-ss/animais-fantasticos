@@ -44,8 +44,10 @@ toolTip.init();
 // Iniciando a função que da o fecth nos números de animais na seção de números
 fetchAnimais('../../animaisapi.json', '.numeros-grid');
 
+// Iniciando a função que faz o betch de bitcoin na seção de contato
+initFetchBitcoin('https://blockchain.info/ticker', '[data-bitcoin]');
+
 dropdownMenu();
 menuMobile();
 funcionamento();
-initFetchBitcoin();
 animacaoScroll();
