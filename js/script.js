@@ -6,10 +6,8 @@ import ScrollSuave from './Modules/scroll-suave.js';
 import Accordion from './Modules/accordion.js';
 // Importando a classe de abrir e fechar o modal
 import Modal from './Modules/modal.js';
-// Importando a classe que anima as section no scroll da página
-import animacaoScroll from './Modules/scroll-animacao.js';
-// Importando a classe do tooltipe
-import toolTip from './Modules/tooltip.js';
+// Importando a classe do tooltip
+import ToolTip from './Modules/tooltip.js';
 // Importando a classe que ativa o dropdown-menu
 import dropdownMenu from './Modules/dropdown-menu.js';
 // Importando a classe que controla o menu mobile
@@ -20,6 +18,8 @@ import funcionamento from './Modules/funcionamento.js';
 import initFetchAnimais from './Modules/fetch-animais.js';
 // Importando a classe que traz o valor de bitcoin na seção de contato
 import initFetchBitcoin from './Modules/fetch-bitcoin.js';
+// Importando a classe que anima as section no scroll da página
+import animacaoScroll from './Modules/scroll-animacao.js';
 
 // Iniciando a classe que faz a nevagação por tabs na seção de animais
 const tabNav = new TabNav('[data-tab="menu"] li', '[data-tab="content"] section');
@@ -37,10 +37,13 @@ accordion.init();
 const modal = new Modal('[data-modal="abrir"]', '[data-modal="fechar"]', '[data-modal="container"]');
 modal.init();
 
-animacaoScroll();
-toolTip();
+// Iniciando a classe do tooltip
+const toolTip = new ToolTip('[data-tooltip]');
+toolTip.init();
+
 dropdownMenu();
 menuMobile();
 funcionamento();
 initFetchAnimais();
 initFetchBitcoin();
+animacaoScroll();
