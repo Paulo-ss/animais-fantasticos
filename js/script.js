@@ -19,7 +19,7 @@ import funcionamento from './Modules/funcionamento.js';
 // Importando a classe que traz o valor de bitcoin na seção de contato
 import initFetchBitcoin from './Modules/fetch-bitcoin.js';
 // Importando a classe que anima as section no scroll da página
-import animacaoScroll from './Modules/scroll-animacao.js';
+import ScrollAnima from './Modules/scroll-anima.js';
 
 // Iniciando a classe que faz a nevagação por tabs na seção de animais
 const tabNav = new TabNav('[data-tab="menu"] li', '[data-tab="content"] section');
@@ -47,7 +47,10 @@ fetchAnimais('../../animaisapi.json', '.numeros-grid');
 // Iniciando a função que faz o betch de bitcoin na seção de contato
 initFetchBitcoin('https://blockchain.info/ticker', '[data-bitcoin]');
 
+// Iniciando a classe do tooltip
+const scrollAnima = new ScrollAnima('[data-anime="scroll"]');
+scrollAnima.init();
+
 dropdownMenu();
 menuMobile();
 funcionamento();
-animacaoScroll();
