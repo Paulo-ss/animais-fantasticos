@@ -1,7 +1,7 @@
 // Importando a função da navegação por tabs na seção de animais
 import iniciarTabMenu from './Modules/tab-nav.js';
 // Importando a função de scroll suave
-import scrollSuave from './Modules/scroll-suave.js';
+import ScrollSuave from './Modules/scroll-suave.js';
 // Chamando a função do accordion list da seção de FAQ
 import accordionFAQ from './Modules/accordion.js';
 // Chamando a função que anima as section no scroll da página
@@ -21,8 +21,10 @@ import initFetchAnimais from './Modules/fetch-animais.js';
 // Importando a função que traz o valor de bitcoin na seção de contato
 import initFetchBitcoin from './Modules/fetch-bitcoin.js';
 
+const scrollSuave = new ScrollSuave('[data-menu="suave"] a[href^="#"]');
+scrollSuave.init();
+
 iniciarTabMenu();
-scrollSuave();
 accordionFAQ();
 animacaoScroll();
 abrirModal();
