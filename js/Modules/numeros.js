@@ -1,36 +1,60 @@
-export default function animaNumeros() {
-  function ativaAnimaNumeros() {
-    const numeros = document.querySelectorAll('[data-numero]');
+export default class AnimaNumeros {
+  constructor(numeros, observerTarget, observerClass) {
+    this.numeros = document.querySelectorAll(numeros);
+    this.observerTarget = document.querySelector(observerTarget);
+    this.observerClass = observerClass;
 
-    numeros.forEach((i) => {
-      const numeroSpan = +i.innerText;
-      const incremento = Math.floor(numeroSpan / 100);
-      let start = 0;
-
-      const timer = setInterval(() => {
-        start += incremento;
-        i.innerText = start;
-        if (start >= numeroSpan) {
-          i.innerText = numeroSpan;
-          clearInterval(timer);
-        }
-      }, 25 * Math.random());
-    });
+    // Fazendo com que o this do handleMutation faça referência
+    // a classe e não ao objeto this.observer
+    this.handleMutation = this.handleMutation.bind(this);
   }
 
-  // Argumento mutation para acessar as propriedades e métodos especiais da mutação que ocorreu no elemento que está sendo observado (se assemelha ao "e" para event) - Retorna um array-like com todos os atributos do elemento que sofreram algum tipo de mutação, // no caso, o array-like terá somente um, a classe que recebeu "ativo"
-  function handleMutation(mutation) {
-    if (mutation[0].target.classList.contains('ativo')) {
+  // Método que recebe um elemento do DOM que tem
+  // como innerText um número e incrementa esse número
+  // de 0 até o valor final
+  static incrementarNumero(numero) {
+    const numeroSpan = +numero.innerText;
+    const incremento = Math.floor(numeroSpan / 100);
+    let start = 0;
+
+    const timer = setInterval(() => {
+      start += incremento;
+      numero.innerText = start;
+      if (start >= numeroSpan) {
+        numero.innerText = numeroSpan;
+        clearInterval(timer);
+      }
+    }, 25 * Math.random());
+  }
+
+  // Método que ativa o método de incrementarNumero para cada elemento selecionado do DOM
+  ativaAnimaNumeros() {
+    this.numeros.forEach((i) => this.constructor.incrementarNumero(i));
+  }
+
+  // Método de callback do objeto observer que ocorre assim que uma mutação
+  // no seu elemento target do DOM ocorrer
+  handleMutation(mutation) {
+    if (mutation[0].target.classList.contains(this.observerClass)) {
       // Fazendo com que o observador para de observar o elemento para que a função ativaAnimaNumeros() só ocorra uma vez
-      observer.disconnect();
-      ativaAnimaNumeros();
+      this.observer.disconnect();
+      this.ativaAnimaNumeros();
     }
   }
 
-  // Criando um observador a partir do construtor nativo MutationObserver(callbackFunction) - Observa um elemento e executa uma função quando alguma alteração nas propriedades desse elemento ocorrer
-  const observer = new MutationObserver(handleMutation);
-  const observerTarget = document.querySelector('.numeros');
+  // Método que cria um objeto oberser com a função de callback
+  // handleMutation() e define um elemento do DOM como o target
+  // desse observer, verificando mutações nos seus atributos
+  addMutationObserver() {
+    this.observer = new MutationObserver(this.handleMutation);
+    this.observer.observe(this.observerTarget, { attributes: true });
+  }
 
-  // Método observe(elemento, {propriedade: valor}) herdado pelo construtor nativo MutationObserver() que observa um elemento em caso de mutação
-  observer.observe(observerTarget, { attributes: true });
+  // Método que inicia a classe
+  init() {
+    if (this.numeros.length && this.observerTarget) {
+      this.addMutationObserver();
+    }
+    return this;
+  }
 }
