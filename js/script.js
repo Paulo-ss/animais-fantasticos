@@ -11,7 +11,7 @@ import ToolTip from './Modules/tooltip.js';
 // Importando a classe que faz o fecth dos números e anima eles na seção de números
 import fetchAnimais from './Modules/fetch-animais.js';
 // Importando a classe que ativa o dropdown-menu
-import dropdownMenu from './Modules/dropdown-menu.js';
+import DropdownMenu from './Modules/dropdown-menu.js';
 // Importando a classe que controla o menu mobile
 import menuMobile from './Modules/menu-mobile.js';
 // Importando a classe que verifica o horário de funcionamento
@@ -51,6 +51,9 @@ initFetchBitcoin('https://blockchain.info/ticker', '[data-bitcoin]');
 const scrollAnima = new ScrollAnima('[data-anime="scroll"]');
 scrollAnima.init();
 
-dropdownMenu();
+// Iniciando a classe do dropdown-menu
+const dropdownMenu = new DropdownMenu('[data-dropdown]');
+dropdownMenu.init();
+
 menuMobile();
 funcionamento();
