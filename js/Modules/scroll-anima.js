@@ -1,3 +1,6 @@
+// Importando a função de debounce
+import debounce from './debounce.js';
+
 // Classe que anima as sections no scroll da página
 export default class ScrollAnima {
   constructor(sections) {
@@ -7,7 +10,8 @@ export default class ScrollAnima {
     this.windowMetade = window.innerHeight * 0.5;
 
     // Fazendo com que o this do método animaScroll faça referência a classe
-    this.checkScroll = this.checkScroll.bind(this);
+    // Colocando a função de debounce no checkScroll
+    this.checkScroll = debounce(this.checkScroll.bind(this), 50);
   }
 
   // Método que retorna um objeto com a distância do topo
