@@ -13,7 +13,7 @@ import fetchAnimais from './Modules/fetch-animais.js';
 // Importando a classe que ativa o dropdown-menu
 import DropdownMenu from './Modules/dropdown-menu.js';
 // Importando a classe que controla o menu mobile
-import menuMobile from './Modules/menu-mobile.js';
+import MenuMobile from './Modules/menu-mobile.js';
 // Importando a classe que verifica o horário de funcionamento
 import funcionamento from './Modules/funcionamento.js';
 // Importando a classe que traz o valor de bitcoin na seção de contato
@@ -55,5 +55,8 @@ scrollAnima.init();
 const dropdownMenu = new DropdownMenu('[data-dropdown]');
 dropdownMenu.init();
 
-menuMobile();
+// Iniciando a classe do menu-mobile
+const menuMobile = new MenuMobile('[data-menu="button"]', '[data-menu="list"]');
+menuMobile.init();
+
 funcionamento();
