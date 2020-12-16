@@ -1,26 +1,51 @@
-export default function funcionamento() {
-  const funcionamentoLI = document.querySelector('[data-semana]');
+export default class Funcionamento {
+  constructor(funcionamento, activeClass) {
+    // Selecionando do elemento DOM que tem os dados de funcionamento
+    this.funcionamento = document.querySelector(funcionamento);
+    // Propriedade com a classe CSS
+    this.activeClass = activeClass;
+  }
 
-  // Pegando o valor do dataset data-semana = 1,2,3,4,5
-  const diasSemana = funcionamentoLI.dataset.semana.split(',').map(Number); // Usar o método de iteração de array map(Number) com o construtor number dentro, converte todos os itens da array de string para number (caso seja possível converte-los)
-  const horasSemana = funcionamentoLI.dataset.horario.split(',').map(Number);
+  // Método que pega os valores do dataset do elemento selecionado
+  // que correspondem ao dias da semana e horas de funcionamento
+  dadosFuncionamento() {
+    this.diasSemana = this.funcionamento.dataset.semana.split(',').map(Number);
+    this.horasSemana = this.funcionamento.dataset.horario.split(',').map(Number);
+  }
 
-  // Pegando a data de agora (quando o JS é executado)
-  const dataAgora = new Date();
-  // Pegando o dia de hoje
-  const hoje = dataAgora.getDay();
-  const horarioAgora = dataAgora.getHours();
+  // Método que pega o dia e hora atuais
+  dadosAgora() {
+    this.dataAgora = new Date();
+    this.hoje = this.dataAgora.getDay();
+    this.horarioAgora = this.dataAgora.getUTCHours() - 3;
+  }
 
-  // Verificando se o dia de hoje está dentro da array com os dias de funcionamento
-  const semanaAberto = diasSemana.indexOf(hoje) !== -1;
+  // Método verifica se o dia e horário atual correspondem ao de funcionamento
+  estaAberto() {
+    const semanaAberto = this.diasSemana.indexOf(this.hoje) !== -1;
+    const horarioAberto = ((this.horarioAgora >= this.horasSemana[0]) && (this.horarioAgora < this.horasSemana[1]));
 
-  // Verificando se o horario de agora está dentro do horário de funcionamento
-  const horarioAberto = ((horarioAgora >= horasSemana[0]) && (horarioAgora < horasSemana[1]));
+    return semanaAberto && horarioAberto;
+  }
 
-  if (semanaAberto && horarioAberto) {
-    funcionamentoLI.classList.add('aberto');
-    funcionamentoLI.setAttribute('title', 'Aberto');
-  } else {
-    funcionamentoLI.setAttribute('title', 'Fechado');
+  // Método que aplica uma classe CSS ao elemento selecionado
+  // e o atributo title caso o método estaAberto() retorna true
+  ativaAberto() {
+    if (this.estaAberto()) {
+      this.funcionamento.classList.add(this.activeClass);
+      this.funcionamento.setAttribute('title', 'Aberto');
+    } else {
+      this.funcionamento.setAttribute('title', 'Fechado');
+    }
+  }
+
+  // Método que inicia a classe
+  init() {
+    if (this.funcionamento) {
+      this.dadosFuncionamento();
+      this.dadosAgora();
+      this.ativaAberto();
+    }
+    return this;
   }
 }

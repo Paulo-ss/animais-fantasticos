@@ -15,7 +15,7 @@ import DropdownMenu from './Modules/dropdown-menu.js';
 // Importando a classe que controla o menu mobile
 import MenuMobile from './Modules/menu-mobile.js';
 // Importando a classe que verifica o horário de funcionamento
-import funcionamento from './Modules/funcionamento.js';
+import Funcionamento from './Modules/funcionamento.js';
 // Importando a classe que traz o valor de bitcoin na seção de contato
 import initFetchBitcoin from './Modules/fetch-bitcoin.js';
 // Importando a classe que anima as section no scroll da página
@@ -42,7 +42,7 @@ const toolTip = new ToolTip('[data-tooltip]');
 toolTip.init();
 
 // Iniciando a função que da o fecth nos números de animais na seção de números
-fetchAnimais('../../animaisapi.json', '.numeros-grid');
+fetchAnimais('./animaisapi.json', '.numeros-grid');
 
 // Iniciando a função que faz o betch de bitcoin na seção de contato
 initFetchBitcoin('https://blockchain.info/ticker', '[data-bitcoin]');
@@ -59,4 +59,6 @@ dropdownMenu.init();
 const menuMobile = new MenuMobile('[data-menu="button"]', '[data-menu="list"]');
 menuMobile.init();
 
-funcionamento();
+// Iniciando a classe do horário de funcionamento
+const funcionamento = new Funcionamento('[data-semana]', 'aberto');
+funcionamento.init();
