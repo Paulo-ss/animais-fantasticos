@@ -20,6 +20,8 @@ import Funcionamento from './Modules/funcionamento.js';
 import initFetchBitcoin from './Modules/fetch-bitcoin.js';
 // Importando a classe que anima as section no scroll da página
 import ScrollAnima from './Modules/scroll-anima.js';
+// Importando a classe do slide
+import { SlideNav } from './Modules/slide.js';
 
 // Iniciando a classe que faz a nevagação por tabs na seção de animais
 const tabNav = new TabNav('[data-tab="menu"] li', '[data-tab="content"] section');
@@ -62,3 +64,8 @@ menuMobile.init();
 // Iniciando a classe do horário de funcionamento
 const funcionamento = new Funcionamento('[data-semana]', 'aberto');
 funcionamento.init();
+
+// Iniciando a classe do slide
+const slideNav = new SlideNav('.slide', '.slide-wrapper');
+slideNav.init();
+slideNav.addControl('.custom-controls');
