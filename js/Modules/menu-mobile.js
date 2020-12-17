@@ -20,7 +20,8 @@ export default class menuMobile {
   // Método que faz o toggle na classe do botão que ativa o menu
   // e no próprio menu e chama a função de outsideClicke para fechar
   // caso o usuário clique fora do menu
-  openMenu() {
+  openMenu(e) {
+    e.preventDefault();
     this.menuButton.classList.toggle(this.ativoClasse);
     this.menuList.classList.toggle(this.ativoClasse);
     outsideClick(this.menuList, this.events, () => {
